@@ -16,6 +16,11 @@ def welcome_user():
     print(f"Hello, {guest}. Welcome to the dinner.")
 
 
+def add_guest():
+    guest_name = input("Enter the name of guest: ").strip().title()
+    guest.append(guest_name)
+
+
 def main():
 
     # ask the user for his name
