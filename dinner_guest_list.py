@@ -6,7 +6,14 @@ def ask_name():
         name = input("Enter your name: ").strip().title()
     except ValueError:
         print("Invalid name. Please enter a valid name.")
-    return name
+    guest.append(name)
+
+
+""" Reject double names """
+
+
+def welcome_user():
+    print(f"Hello, {guest}. Welcome to the dinner.")
 
 
 def main():
