@@ -21,30 +21,54 @@ def add_guest():
     guest.append(guest_name)
 
 
+def modify_guest():
+    for char in guest:
+        guest_name = input("Enter the correct guest name: ").strip().title()
+        guest.append(guest_name)
+
+
 def main():
-
     # ask the user for his name
-
+    ask_name()
     # welcome the user to the dinner.
-
+    welcome_user()
     # ask the user to choose from the options
-
+    choice = input("Choose from the options below.")
+    print(choice)
     # based on the choice the user made run features
-
+    """Runs based on the choice user made."""
     # features
+    print("\n1 - Add guest")
+    print("2 - Modify guest")
+    print("3 - Remove guest")
+    print("4 - Sort guests")
+    print("5 - Show number of guests")
+    print("6 - Show invitations")
+    print("0 - Exit")
+    # Add guests
+    while True:
+        if choice == "1":
+            add_guest()
+        # Modify guest.
+        elif choice == "2":
+            modify_guest()
+        # Remove guest.
+        elif choice == "3":
+            remove_guest()
+        # Sort guests.
+        elif choice == "4":
+            sort_guest()
+        # Show number of guests.
+        elif choice == "5":
+            show_guest()
+        # Show invitations.
+        elif choice == "6":
+            show_invitations()
+        # exit
+        elif choice == "0":
+            break
+        else:
+            print("Please enter a number according to the features.")
 
-    # add guests
-
-    # .Modify guest.
-
-    # Remove guest.
-
-    # Sort guests.
-
-    # Show number of guests.
-
-    # Show invitations.
-
-    # exit
     if __name__ == "__main__":
         main()
