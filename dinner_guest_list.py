@@ -13,7 +13,7 @@ def ask_name():
 
 
 def welcome_user():
-    print(f"Hello, {guest}. Welcome to the dinner.")
+    print(f"Hello, {guest}. Welcome to the dinner party.")
 
 
 def add_guest():
@@ -31,12 +31,29 @@ def remove_guest():
     if guest_name in guest:
         guest.remove(guest_name)
     if not guest:
-        print("Guest is not included in the list")
+        print("Guest is not included in the list.")
 
 
 def sort_guest(guest: list, name: str):
     if name in guest.isalpha():
         guest.sort
+
+
+def show_guest():
+    number = len(guest)
+    print(f" Total number of guests in the list are: {number}")
+
+
+def show_invitations():
+    pass
+    input(
+        " type in a name "
+    )  # check if the name exiat in the list or not , if not then loop the process
+    input("allergic??")
+    input(
+        "is the person bringing someone along"
+    )  # makes  new invitation if they are bringing someone
+    """ additional information """
 
 
 def main():
