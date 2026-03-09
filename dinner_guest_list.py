@@ -26,14 +26,17 @@ def modify_guest():
     guest.append(guest_name)
 
 
-guest_name = input("Enter the name of guest to remove: ").strip().title()
-
-
 def remove_guest():
+    guest_name = input("Enter the name of guest to remove: ").strip().title()
     if guest_name in guest:
         guest.remove(guest_name)
     if not guest:
         print("Guest is not included in the list")
+
+
+def sort_guest(guest: list, name: str):
+    if name in guest.isalpha():
+        guest.sort
 
 
 def main():
