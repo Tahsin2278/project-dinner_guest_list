@@ -22,9 +22,18 @@ def add_guest():
 
 
 def modify_guest():
-    for char in guest:
-        guest_name = input("Enter the correct guest name: ").strip().title()
-        guest.append(guest_name)
+    guest_name = input("Enter the correct guest name: ").strip().title()
+    guest.append(guest_name)
+
+
+guest_name = input("Enter the name of guest to remove: ").strip().title()
+
+
+def remove_guest():
+    if guest_name in guest:
+        guest.remove(guest_name)
+    if not guest:
+        print("Guest is not included in the list")
 
 
 def main():
