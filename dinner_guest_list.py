@@ -1,7 +1,7 @@
 guest = []
 
 
-def ask_name():
+def ask_name():  # This function asks the user for their name and add it to the list.
     name = input("Enter your name: ").strip().title()
     guest.append(name)
 
@@ -9,11 +9,11 @@ def ask_name():
 """ Reject double names """
 
 
-def welcome_user():
+def welcome_user():  # It welcomes user, to the dinner party.
     print(f"Hello, {guest [-1]}. Welcome to the dinner party.")
 
 
-def features():
+def features():  # This function shows all the features from which the user can choose one.
     print("\n1 - Add guest")
     print("2 - Modify guest")
     print("3 - Remove guest")
@@ -23,12 +23,12 @@ def features():
     print("0 - Exit")
 
 
-def add_guest():
+def add_guest():  # It adds a user to the list
     guest_name = input("Enter the name of guest: ").strip().title()
     guest.append(guest_name)
 
 
-def modify_guest():
+def modify_guest():  # It modifies the user name, if it belongs in the list
     old_name = input("Enter the name of guest: ").strip().title()
     if old_name in guest:
         new_name = input("Enter the new name: ").strip().title()
@@ -36,26 +36,26 @@ def modify_guest():
         guest[index] = new_name
 
 
-def remove_guest():
+def remove_guest():  # It removes a guest from the list, if the guest remains on the list.
     guest_name = input("Enter the name of guest to remove: ").strip().title()
     if guest_name in guest:
         guest.remove(guest_name)
         print("Guest removed.")
-    if guest_name not in guest:
+    if not guest_name in guest:
         print("Guest is not included in the list.")
 
 
-def sort_guest():
+def sort_guest():  # It will sort the guests in alphabetical order.
     guest.sort()
     print("Guest sorted.")
 
 
-def show_guest():
+def show_guest():  # It will show the total number of guests.
     number = len(guest)
     print(f" Total number of guests in the list are: {number}.")
 
 
-def show_invitations():
+def show_invitations():  # It will collect information from user and print it as an invitation.
 
     guest_name = input(
         "Enter your name: "
@@ -72,7 +72,7 @@ def show_invitations():
     allergy = input("Is the person allergic to something?")
     print("Allergy info: ", allergy)
 
-    extra_people = print(input("Are you bringing someone?"))
+    extra_people = print(input("Are you bringing someone along? (yes or no)"))
     if extra_people == "yes":
         try:
             print(int(input("How many people are there?")))
@@ -88,6 +88,8 @@ def show_invitations():
 
 
 def main():
+    """The program will ask the user for their name, give them access to multiple options, by which they can add guest, modify guest, sort guest, remove guest, see number of guests and print the invitation."""
+
     # ask the user for his name
     ask_name()
     # welcome the user to the dinner.
@@ -101,7 +103,7 @@ def main():
     # Add guests
     while True:
         features()
-        choice = input("Choose from the options below.")
+        choice = input("Choose from the options above.").strip()
         if choice == "1":
             add_guest()
         # Modify guest.
@@ -121,6 +123,7 @@ def main():
             show_invitations()
         # exit
         elif choice == "0":
+            print("Goodbye! Have a great day.")
             break
         else:
             print("Please enter a number according to the features.")
