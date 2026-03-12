@@ -26,6 +26,8 @@ def features():  # This function shows all the features from which the user can 
 def add_guest():  # It adds a user to the list
     guest_name = input("Enter the name of guest: ").strip().title()
     guest.append(guest_name)
+    print("Guest added")
+    print(f"New guest: {guest_name}")
 
 
 def modify_guest():  # It modifies the user name, if it belongs in the list
@@ -34,6 +36,8 @@ def modify_guest():  # It modifies the user name, if it belongs in the list
         new_name = input("Enter the new name: ").strip().title()
         index = guest.index(old_name)
         guest[index] = new_name
+        print("Guest name modified")
+        print(f"New modified name: {new_name} ")
 
 
 def remove_guest():  # It removes a guest from the list, if the guest remains on the list.
@@ -56,7 +60,6 @@ def show_guest():  # It will show the total number of guests.
 
 
 def show_invitations():  # It will collect information from user and print it as an invitation.
-
     guest_name = input(
         "Enter your name: "
     )  # check if the name exists in the list or not , if not then loop the process
@@ -69,6 +72,8 @@ def show_invitations():  # It will collect information from user and print it as
                 .title()
             )
         break
+    pronoun = input("Enter suitable pronoun (he/him or she/her): ")
+    print(f"You are {pronoun}")
     allergy = input("Is the person allergic to something?")
     print("Allergy info: ", allergy)
 
