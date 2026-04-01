@@ -1,18 +1,21 @@
+host = ""
 guest = []
+extra_guests = {}
 
 
 def ask_name():  # This function asks the user for their name and add it to the list.
+    global host
     while True:
         name = input("Enter your name: ").strip().title()
 
-        if not name:
+        if not name:  # Name can't be empty
             print("Name cannot be empty.")
             continue
 
-        if name in guest:
+        if name in guest:  # Prevents double names
             print("Name already exists. Try again.")
         else:
-            guest.append(name)
+            host = name
             break
 
 
@@ -20,7 +23,7 @@ def ask_name():  # This function asks the user for their name and add it to the 
 
 
 def welcome_user():  # It welcomes user, to the dinner party.
-    print(f"Hello, {guest[-1]}. Welcome to the dinner party.")
+    print(f"Hello, {host}. Welcome to the dinner party.")
 
 
 def features():  # This function shows all the features from which the user can choose one.
@@ -35,13 +38,14 @@ def features():  # This function shows all the features from which the user can 
 
 def add_guest():  # It adds a user to the list
     guest_name = input("Enter the name of guest: ").strip().title()
-    if not guest_name:
+    if not guest_name:  # Name can't be empty
         print("Name cannot be empty.")
 
     elif guest_name in guest:
         print("Guest already exists")
     else:
         guest.append(guest_name)
+        extra_guests[guest_name] = 0
         print("Guest added")
         print(f"New guest: {guest_name}")
 
@@ -51,13 +55,15 @@ def modify_guest():
 
     if old_name in guest:
         new_name = input("Enter the new name: ").strip().title()
-        if not new_name:
+        if not new_name:  # Name can't be empty
             print("Name cannot be empty.")
         elif new_name in guest:
             print("That name already exists.")
         else:
             index = guest.index(old_name)
             guest[index] = new_name
+            # keep extra guest data in sync
+            extra_guests[new_name] = extra_guests.pop(old_name, 0)
             print("Guest name modified")
             print(f"New modified name: {new_name}")
     else:
@@ -68,6 +74,7 @@ def remove_guest():  # It removes a guest from the list, if the guest remains on
     guest_name = input("Enter the name of guest to remove: ").strip().title()
     if guest_name in guest:
         guest.remove(guest_name)
+        extra_guests.pop(guest_name, 0)
         print("Guest removed.")
     else:
         print("Guest is not included in the list")
@@ -79,14 +86,24 @@ def sort_guest():  # It will sort the guests in alphabetical order.
 
 
 def show_guest():  # It will show the total number of guests.
-    number = len(guest)
-    print(f" Total number of guests in the list are: {number}")
+    main_count = len(guest)
+    extra_count = sum(extra_guests.values())
+    total = main_count + extra_count
+
+    print(f"Main guests: {main_count}")
+    print(f"Extra guests: {extra_count}")
+    print(f"Total people attending: {total}")
 
 
 def show_invitations():  # It will collect information from user and print it as an invitation.
+    if not guest:
+        print("No guests available.")
+        return
+
+    print("Guest list:", guest)
     while True:
         guest_name = (
-            input("Enter your name: ").strip().title()
+            input("Select a guest from the list: ").strip().title()
         )  # check if the name exists in the list or not , if not then loop the process
 
         if guest_name in guest:
@@ -96,15 +113,16 @@ def show_invitations():  # It will collect information from user and print it as
 
     pronoun = input("Enter suitable pronoun (he/him or she/her): ").strip()
 
-    allergy = input("Is the person allergic to something?")
+    allergy = input("Is the person allergic to something? ").strip()
     while True:
         extra_people = (
             input("Are you bringing someone along? (yes or no)").strip().lower()
         )
         if extra_people in ["yes", "no"]:
             break
-        print("Please type yes or no.")
-    extra_count = 0
+        else:
+            print("Please type yes or no.")
+
     if extra_people == "yes":
         while True:
             try:
@@ -113,7 +131,10 @@ def show_invitations():  # It will collect information from user and print it as
             except ValueError:
                 print("Please type in a number.")
     else:
-        pass
+        extra_count = 0
+
+    # store extra_guests
+    extra_guests[guest_name] = extra_count
 
     print("\n--- Invitation ---")
     print(f"Dear {guest_name},")
@@ -121,7 +142,7 @@ def show_invitations():  # It will collect information from user and print it as
     print(f"Pronouns: {pronoun}")
     print(f"Allergies: {allergy if allergy else 'None'}")
 
-    if extra_people == "yes":
+    if extra_count > 0:
         print(f"You are bringing {extra_count} guest(s).")
     else:
         print("No additional guests.")
