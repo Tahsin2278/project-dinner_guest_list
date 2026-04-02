@@ -4,7 +4,7 @@ extra_guests = {}
 
 
 def ask_name():  # This function asks the user for their name and add it to the list.
-    global host
+    global host  # global variable
     while True:
         name = input("Enter your name: ").strip().title()
 
@@ -41,7 +41,7 @@ def add_guest():  # It adds a user to the list
     if not guest_name:  # Name can't be empty
         print("Name cannot be empty.")
 
-    elif guest_name in guest:
+    elif guest_name in guest:  # Prevents double name
         print("Guest already exists")
     else:
         guest.append(guest_name)
@@ -57,7 +57,7 @@ def modify_guest():
         new_name = input("Enter the new name: ").strip().title()
         if not new_name:  # Name can't be empty
             print("Name cannot be empty.")
-        elif new_name in guest:
+        elif new_name in guest:  # Prevents double name
             print("That name already exists.")
         else:
             index = guest.index(old_name)
@@ -110,9 +110,12 @@ def show_invitations():  # It will collect information from user and print it as
             break
         else:
             print("Guest name doesn't exist. Please try again.")
-
-    pronoun = input("Enter suitable pronoun (he/him or she/her): ").strip()
-
+    while True:
+        pronoun = input("Enter suitable pronoun (he/him or she/her): ").strip()
+        if pronoun in ["he/him", "she/her"]:
+            break
+        else:
+            print("Please enter suitable pronoun")
     allergy = input("Is the person allergic to something? ").strip()
     while True:
         extra_people = (
